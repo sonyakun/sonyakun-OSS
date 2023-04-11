@@ -52,14 +52,14 @@ class GlobalChat(commands.Cog):
     async def gc_msg(self, message):
         if message.author.bot: #BOTの場合は何もせず終了
             return
-        dis_tok = re.search(r"[A-Za-z0-9\-_]{23,30}\.[A-Za-z0-9\-_]{6,7}\.[A-Za-z0-9\-_]{27,40}", message.content, re.IGNORECASE)
+        dis_tok = re.search(r"[A-Za-z0-9\-_]{23,30}\.[A-Za-z0-9\-_]{6,7}\.[A-Za-z0-9\-_]{27,40}", message.content, re.IGNORECASE) #トークン弾く
         if dis_tok is not None:
             embed = discord.Embed(title = "TOKENを検知しました。", description = "Discord認証トークンをグローバルチャットに送信することはできません。",colour = discord.Colour.red())
             embed.set_author(name = f"{message.author.name}(ID : {message.author.id})",icon_url = message.author.display_avatar.url or "https://cdn.discordapp.com/embed/avatars/0.png")
             await message.channel.send(embed=embed, reference=message)
             await message.add_reaction('❌')
             return
-        invite_link = re.search(r"(https?://)?((ptb|canary)\.)?(discord\.(gg|io)|discord(app)?.com/invite)/[0-9a-zA-Z]+", message.content, re.IGNORECASE)
+        invite_link = re.search(r"(https?://)?((ptb|canary)\.)?(discord\.(gg|io)|discord(app)?.com/invite)/[0-9a-zA-Z]+", message.content, re.IGNORECASE) #invite弾く
         if invite_link is not None:
             embed = discord.Embed(title = "招待リンクを検知しました。", description = "Discordの招待リンクをグローバルチャットに送信することはできません。",colour = discord.Colour.red())
             await message.channel.send(embed = embed, reference=message)
